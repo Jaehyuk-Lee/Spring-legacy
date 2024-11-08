@@ -15,6 +15,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	
+	<!-- /mvc로 접속하면 ClassicMVC로 전달해주는 매퍼 역할 -->
 	<beans:bean name="/mvc" class="net.developia.controller.ClassicMVC"></beans:bean>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -24,7 +25,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="net.developia.controller" />
-	
-	
 	
 </beans:beans>

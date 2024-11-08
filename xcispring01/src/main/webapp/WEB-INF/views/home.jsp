@@ -10,5 +10,9 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<ol>
+	<li><a href="/mvc" >spring mvc 1.0</a></li>
+</ol>
 </body>
 </html>

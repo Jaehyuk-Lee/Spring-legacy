@@ -24,6 +24,6 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
+	<!-- mapper 패키지 안에 있는 인터페이스들을 자동으로 스캔해줌 -->
 	<mybatis-spring:scan base-package="net.developia.mapper"></mybatis-spring:scan>
-	<context:component-scan base-package="net.developia.controller"></context:component-scan>
 </beans>
