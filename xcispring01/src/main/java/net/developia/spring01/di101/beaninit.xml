@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="samsungtv" class="net.developia.spring01.di101.SamsungTV">
+		<property name="speaker" ref="harmanspeaker" />
+	</bean>
+	<bean name="lgtv" class="net.developia.spring01.di101.LgTV">
+		<property name="speaker" ref="orangespeaker" />
+	</bean>
+	<bean name="harmanspeaker" class="net.developia.spring01.di101.HarmanSpeaker"></bean>
+	<bean name="orangespeaker" class="net.developia.spring01.di101.OrangeSpeaker"></bean>
+	<bean name="appletv" class="net.developia.spring01.di101.AppleTV"></bean>
+</beans>
