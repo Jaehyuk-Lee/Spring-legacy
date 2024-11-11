@@ -22,8 +22,12 @@
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
+		<!--  이걸 쓰고 나면 value에 있는 패키지 주소는 생략 가능. value 안에 ','로 쭉 이어서 추가 가능 -->
+		<property name="typeAliasesPackage" value="net.developia.domain"></property>
 	</bean>
 	
-	<!-- mapper 패키지 안에 있는 인터페이스들을 자동으로 스캔해줌 -->
-	<mybatis-spring:scan base-package="net.developia.mapper"></mybatis-spring:scan>
+	<!-- mapper 패키지 안에 있는 인터페이스들을 자동으로 스캔해줌
+	   	 MVC 외의 스캔 -->
+	<mybatis-spring:scan base-package="net.developia.mapper" />
+	<context:component-scan base-package="net.developia.service" />
 </beans>
