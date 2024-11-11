@@ -23,15 +23,18 @@ import net.developia.domain.TodoDTO;
 // Reuqest 받기! 예제들
 
 @Controller
+// 최상위에 RequestMapping을 넣어서 공통 url 설정
 @RequestMapping("/sample/*")
 @Log
 public class SampleController {
 	
+	// 기본 매핑 (걸리지 않은 모든 url에 대해 작동)
 	@RequestMapping(value="")
 	public void basic() {
 		log.info("basic.....");
 	}
 	
+	// 메서드에 url 특정하기
 	@RequestMapping(value="/basic", method= {RequestMethod.GET, RequestMethod.POST})
 	public void basicGet() {
 		log.info("basic GET......");
@@ -51,11 +54,11 @@ public class SampleController {
 	}
 	
 	@GetMapping("/ex02")
-	public String ex02(@RequestParam("name") String name, @RequestParam("age") int age, Model model) {
+	public String ex02(@RequestParam("name") String name, @RequestParam(value="age", defaultValue="99") int age, Model model) {
 		log.info("name: " + name);
 		log.info("age: " + age);
-//		model.addAttribute("name", name);
-//		model.addAttribute("age", age);
+		model.addAttribute("name", name);
+		model.addAttribute("age", age);
 		return "ex";
 	}
 	
@@ -108,6 +111,7 @@ public class SampleController {
 		return dto;
 	}
 	
+	// ResponseEntity를 리턴하는 것도 바로 뿌려줄 수 있네
 	@GetMapping("/ex07")
 	public ResponseEntity<SampleDTO> ex07() {
 		log.info("/ex07.....");
