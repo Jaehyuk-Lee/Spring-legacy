@@ -15,7 +15,6 @@ import net.developia.mapper.TimeMapper;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log
 public class TimeMapperTests {
-	// root-context.xml에 정의된 bean 중 DataSource를 구현한 클래스를 가져옴.
 	@Autowired
 	private TimeMapper timeMapper;
 	
