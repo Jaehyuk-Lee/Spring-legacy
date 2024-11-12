@@ -8,7 +8,7 @@ This project uses [Lombok](https://projectlombok.org/) `v1.18.24`.
     * Windows: `sts-3.*.*.RELEASE\`
     * Mac: `/Applications/STS.app/Contents/Eclipse/`
 1. Start lombok.jar library installer by running command:  
-`java jar lombok.jar`
+`java -jar lombok.jar`
 1. Choose STS(eclipse) which you use to open this project.
 1. Click Install and done!
 1. To check if lombok is installed correctly, open `STS.ini` file and see if it has follwing statement:  
