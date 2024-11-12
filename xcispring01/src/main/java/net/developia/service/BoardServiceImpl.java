@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.developia.domain.BoardVO;
+import net.developia.domain.Criteria;
 import net.developia.mapper.BoardMapper;
 
 @Log4j
@@ -68,6 +69,16 @@ public class BoardServiceImpl implements BoardService{
 	public List<BoardVO> getList() throws Exception {
 		try {
 			return mapper.getList();
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			throw e;
+		}
+	}
+
+	@Override
+	public List<BoardVO> getList(Criteria cri) throws Exception {
+		try {
+			return mapper.getListWithPaging(cri);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			throw e;

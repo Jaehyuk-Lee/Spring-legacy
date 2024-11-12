@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.developia.domain.BoardVO;
+import net.developia.domain.Criteria;
+import net.developia.domain.PageDTO;
 import net.developia.service.BoardService;
 
 @Controller
@@ -20,18 +22,35 @@ import net.developia.service.BoardService;
 public class BoardController {
 	private BoardService service;
 	
+//	@RequestMapping("/list")
+//	public String list(Model model) {
+//		log.info("list........");
+//		try {
+//			model.addAttribute("list", service.getList());
+//			return "board/list";
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			// log.error(e.getMessage());
+//			return null;
+//		}
+//	}
+	
 	@RequestMapping("/list")
-	public String list(Model model) {
-		log.info("list........");
+	public String list(Criteria cri, Model model) {
+		log.info("list........" + cri);
 		try {
-			model.addAttribute("list", service.getList());
-			return "list";
+			model.addAttribute("list", service.getList(cri));
+			model.addAttribute("pageMaker", new PageDTO(cri, 123));
+			return "board/list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log.error(e.getMessage());
 			return null;
 		}
 	}
+	
+	@GetMapping("/register")
+	public void register() { }
 	
 	// Redirect를 하면 Model이 없고 RedirectAtrributes가 있다
 	// 값을 한 번만 뿌려주고 사라지는 값
@@ -49,7 +68,7 @@ public class BoardController {
 		}
 	}
 	
-	@GetMapping("/get")
+	@GetMapping({"/get", "/modify"})
 	public void get(long bno, Model model) {
 		log.info("get: " + bno);
 		try {
@@ -65,7 +84,7 @@ public class BoardController {
 		
 		try {
 			if (service.modify(board)) {
-				rttr.addFlashAttribute("result", "success");
+				rttr.addFlashAttribute("result", "modify-success");
 			}
 			return "redirect:/board/list";
 		} catch (Exception e) {
@@ -79,7 +98,7 @@ public class BoardController {
 		log.info("remove: " + bno);
 		try {
 			if(service.remove(bno)) {
-				rttr.addFlashAttribute("result", "success");
+				rttr.addFlashAttribute("result", "remove-success");
 			}
 			return "redirect:/board/list";
 		} catch (Exception e) {

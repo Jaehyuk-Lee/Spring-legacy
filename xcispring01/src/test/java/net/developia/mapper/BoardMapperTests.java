@@ -2,6 +2,7 @@ package net.developia.mapper;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.util.List;
 
@@ -12,12 +13,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lombok.Setter;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
 import net.developia.domain.BoardVO;
+import net.developia.domain.Criteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:**/root-context.xml")
-@Log
+@Log4j
 public class BoardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
@@ -27,6 +29,14 @@ public class BoardMapperTests {
 //		mapper.getList().forEach(board -> log.info("" + board));
 		
 		List<BoardVO> list = mapper.getList();
+		assertNotEquals(null, list);
+	}
+	
+	@Test
+	public void testGetListWithPaging() {
+//		mapper.getList().forEach(board -> log.info("" + board));
+		
+		List<BoardVO> list = mapper.getListWithPaging(new Criteria(3, 10));
 		assertNotEquals(null, list);
 	}
 	

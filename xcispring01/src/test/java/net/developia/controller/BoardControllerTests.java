@@ -31,9 +31,19 @@ public class BoardControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
+//	@Test
+//	public void testList() throws Exception {
+//		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
+//				.andReturn() // Return 되야하는 것들을 get으로 가져온다.
+//				.getModelAndView()
+//				.getModelMap());
+//	}
+	
 	@Test
 	public void testList() throws Exception {
-		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list")
+				.param("pageNum", "2")
+				.param("amount", "50"))
 				.andReturn() // Return 되야하는 것들을 get으로 가져온다.
 				.getModelAndView()
 				.getModelMap());

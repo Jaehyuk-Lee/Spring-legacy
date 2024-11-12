@@ -13,6 +13,7 @@
 
 <ol>
 	<li><a href="/mvc" >spring mvc 1.0</a></li>
+	<li><a href="/board/list" >게시판 리스트</a></li>
 </ol>
 </body>
 </html>
