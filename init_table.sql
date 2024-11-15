@@ -16,3 +16,7 @@ INSERT INTO tbl_board(bno, title, content, writer)
 values (seq_board.nextval, '테스트 제목', '테스트 내용', 'user00');
 
 commit;
+
+-- Transaction 실습용 테이블
+CREATE TABLE tbl_sample1( col1 VARCHAR2(500));
+CREATE TABLE tbl_sample2( col2 VARCHAR2(50));
