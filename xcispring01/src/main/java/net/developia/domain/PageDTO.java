@@ -18,6 +18,7 @@ public class PageDTO {
 		this.total = total;
 		
 		this.endPage = (int) (Math.ceil(cri.getPageNum() / 10.0)) * 10;
+		// ceil로 올림을 통해 단순히 /10*10 할 때는 -1처리를 해줘야 했던 부분 없게 함
 		this.startPage = this.endPage - 9;
 		
 		int realEnd = (int) (Math.ceil((total * 1.0) / cri.getAmount()));

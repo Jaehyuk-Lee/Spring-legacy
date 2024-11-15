@@ -84,5 +84,11 @@ public class BoardServiceImpl implements BoardService{
 			throw e;
 		}
 	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+		return mapper.getTotalCount(cri);
+	}
 	
 }

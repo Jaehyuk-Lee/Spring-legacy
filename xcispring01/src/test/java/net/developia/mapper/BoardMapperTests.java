@@ -2,7 +2,6 @@ package net.developia.mapper;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.util.List;
 

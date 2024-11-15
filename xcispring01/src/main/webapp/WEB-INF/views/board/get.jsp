@@ -31,10 +31,8 @@
           		<div class="form-group">
           			<label>Writer</label> <input class="form-control" name="writer" value='<c:out value="${board.writer}" />' readonly="readonly">
           		</div>
-          		<button data-oper='modify' class="btn btn-default"
-          			onclick="location.href='/board/modify?bno=<c:out value="${board.bno }"/>'">Modify</button>
-          		<button data-oper='list' class="btn btn-default"
-          			onclick="location.href='/board/list'">List</button>
+          		<button data-oper='modify' class="btn btn-default">Modify</button>
+          		<button data-oper='list' class="btn btn-default">List</button>
             </div>
             <!-- end panel-body -->
         </div>
@@ -42,5 +40,22 @@
     </div>
 </div>
 <!-- /.row -->
-
+<form id='operForm' action="/board/modify" method="get">
+	<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno }"/>'>
+	<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+	<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
+</form>
+<script>
+ 	$().ready(()=> {
+		$('button[data-oper="modify"]').on("click", function(e){
+			let operForm = $("#operForm");
+			operForm.submit();
+		});
+		$('button[data-oper="list"]').on("click", function(e){
+			let operForm = $("#operForm");
+			operForm.attr("action", "/board/list");
+			operForm.submit();
+		});
+	});
+</script>
 <%@ include file="../includes/footer.jsp" %>

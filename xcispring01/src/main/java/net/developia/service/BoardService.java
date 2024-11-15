@@ -12,4 +12,5 @@ public interface BoardService {
 	public boolean remove(Long bno) throws Exception;
 	public List<BoardVO> getList() throws Exception;
 	public List<BoardVO> getList(Criteria cri) throws Exception;
+	public int getTotal(Criteria cri);
 }

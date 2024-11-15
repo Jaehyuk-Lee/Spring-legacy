@@ -3,6 +3,7 @@ package net.developia.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,8 +40,10 @@ public class BoardController {
 	public String list(Criteria cri, Model model) {
 		log.info("list........" + cri);
 		try {
+			int total = service.getTotal(cri);
+			log.info("total: " + total);
 			model.addAttribute("list", service.getList(cri));
-			model.addAttribute("pageMaker", new PageDTO(cri, 123));
+			model.addAttribute("pageMaker", new PageDTO(cri, total));
 			return "board/list";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,23 +72,27 @@ public class BoardController {
 	}
 	
 	@GetMapping({"/get", "/modify"})
-	public void get(long bno, Model model) {
-		log.info("get: " + bno);
+	public void get(@RequestParam("bno") long bno, @ModelAttribute("cri") Criteria cri, Model model) {
+		log.info("get or modify: " + bno);
 		try {
 			model.addAttribute("board", service.get(bno));
+			// @ModelAttribute로 받은 파라미터는 자동으로 Model에 데이터를 지정한 이름으로 담아서 전달해줌
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	@PostMapping("/modify")
-	public String modify(BoardVO board, RedirectAttributes rttr) {
+	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("modify: " + board);
 		
 		try {
 			if (service.modify(board)) {
 				rttr.addFlashAttribute("result", "modify-success");
 			}
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			
 			return "redirect:/board/list";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,12 +101,15 @@ public class BoardController {
 	}
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("remove: " + bno);
 		try {
 			if(service.remove(bno)) {
 				rttr.addFlashAttribute("result", "remove-success");
 			}
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addAttribute("amount", cri.getAmount());
+			
 			return "redirect:/board/list";
 		} catch (Exception e) {
 			e.printStackTrace();
