@@ -41,4 +41,4 @@ jobs:
         token: ${{ secrets.MAVEN_DEPENDENCY_TOKEN }}
 
     - name: Test with Maven
-      run: mvn -Dtest="./src/test/java/**/*Tests*" test
+      run: mvn test #-Dtest="./src/test/java/**/*Tests*" test
