@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +19,9 @@ import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Log4j
-@PropertySource("classpath:/resources/application.properties")
 public class UploadController {
 	
-	@Value("${uploadFoler}")
-	private String uploadFolder;
+	private String uploadFolder = "/Users/alex00728/dev/upload";
 	
 	@GetMapping("/uploadForm")
 	public void uploadForm() {
